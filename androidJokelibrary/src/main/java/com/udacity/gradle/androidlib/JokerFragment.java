@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -31,8 +32,10 @@ public class JokerFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_joker, container, false);
         Intent intent = getActivity().getIntent();
         String joke = intent.getStringExtra(JokerActivity.JOKER_KEY);
+        TextView textEdit = (TextView) view.findViewById(R.id.tv_joke_text);
         if (joke.length() >0) {
-            Toast.makeText(getActivity(), joke, Toast.LENGTH_LONG).show();
+            textEdit.setText(joke);
+            //Toast.makeText(getActivity(), joke, Toast.LENGTH_LONG).show();
         }
         return view;
     }

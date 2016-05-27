@@ -1,8 +1,10 @@
 package com.udacity.gradle.androidlib;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 public class JokerActivity extends AppCompatActivity {
 
