@@ -28,6 +28,16 @@ public class JokeEndpointAsyncTask extends AsyncTask<Pair<Context, String>, Void
     }
 
     @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+    }
+
+    @Override
+    protected void onProgressUpdate(Void... values) {
+        super.onProgressUpdate(values);
+    }
+
+    @Override
     protected String doInBackground(Pair<Context, String>... params) {
         if (myApiService == null) {  // Only do this once
 //            MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),

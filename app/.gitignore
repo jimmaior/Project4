@@ -42,3 +42,6 @@ captures/
 # non project files
 /workspace
 workspace/
+
+# google-services configuration file
+google-services.json
