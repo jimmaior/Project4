@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
@@ -21,6 +23,8 @@ public class MainActivity extends AppCompatActivity
     private static final String TAG = MainActivity.class.getSimpleName();
     private InterstitialAd mInterstitialAd;
     private String mJoke;
+    private Button mButton;
+    private ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,21 @@ public class MainActivity extends AppCompatActivity
 
         }
 
+        // progressbar
+        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        mProgressBar.setIndeterminate(true);
+        mProgressBar.setVisibility(View.GONE);
+
+        // button
+        mButton = (Button) findViewById(R.id.btn_tell_joke);
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mProgressBar.setVisibility(View.VISIBLE);
+                tellJoke();
+            }
+        });
+
         // Interstitial Ad support
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_unit_id));
@@ -46,7 +65,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
         requestNewInterstitial();
-
     }
 
     @Override
@@ -71,17 +89,18 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    public void tellJoke (View view) {
+    public void tellJoke () {
         new JokeEndpointAsyncTask(this).execute();
     }
 
     public void onFetchJokeComplete(String joke){
-        if (joke .length() > 0) {
+        if (joke.length() > 0) {
             mJoke = joke;
             showJokeToUser();
         } else {
             Toast.makeText(this, "derp", Toast.LENGTH_LONG).show();
         }
+        mProgressBar.setVisibility(View.GONE);
     }
 
     private void showJokeToUser() {
@@ -98,7 +117,7 @@ public class MainActivity extends AppCompatActivity
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .build();
-        mInterstitialAd.loadAd(adRequest);
+    mInterstitialAd.loadAd(adRequest);
     }
 
 }

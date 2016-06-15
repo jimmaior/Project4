@@ -3,6 +3,7 @@ package com.udacity.gradle.builditbigger;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v4.util.Pair;
+import android.util.Log;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
@@ -18,6 +19,7 @@ import java.io.IOException;
 //public class JokeEndpointAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
 public class JokeEndpointAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
     private static MyApi myApiService = null;
+    private static final String TAG = JokeEndpointAsyncTask.class.getSimpleName();
 
   //  private MainActivity mCallerActivity;
     private  OnFetchJokeTaskComplete mFetchJokeListener;
@@ -29,16 +31,19 @@ public class JokeEndpointAsyncTask extends AsyncTask<Pair<Context, String>, Void
 
     @Override
     protected void onPreExecute() {
+        Log.d(TAG,"onPreExecute");
         super.onPreExecute();
     }
 
     @Override
     protected void onProgressUpdate(Void... values) {
+        Log.d(TAG, "onProgressUpdate");
         super.onProgressUpdate(values);
     }
 
     @Override
     protected String doInBackground(Pair<Context, String>... params) {
+        Log.d(TAG, "doInBackground");
         if (myApiService == null) {  // Only do this once
 //            MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
 //                    new AndroidJsonFactory(), null)
@@ -70,6 +75,7 @@ public class JokeEndpointAsyncTask extends AsyncTask<Pair<Context, String>, Void
 
     @Override
     protected void onPostExecute(String result) {
+        Log.d(TAG, "onPostExecute");
        //mCallerActivity.showJoke(result);
         mFetchJokeListener.onFetchJokeComplete(result);
     }

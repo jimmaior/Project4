@@ -35,7 +35,6 @@ public class JokerFragment extends Fragment {
         TextView textEdit = (TextView) view.findViewById(R.id.tv_joke_text);
         if (joke.length() >0) {
             textEdit.setText(joke);
-            //Toast.makeText(getActivity(), joke, Toast.LENGTH_LONG).show();
         }
         return view;
     }
